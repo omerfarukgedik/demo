@@ -1,0 +1,91 @@
+.feed {
+  background-color: var(--white);
+  border-radius: 9pt;
+  box-shadow: 0px 5px 15px var(--box-shadow);
+}
+
+.feed img {
+  height: 150px;
+  object-fit: cover;
+}
+
+.feed > .top_wrapper {
+  position: relative;
+}
+
+.star {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--red);
+  border-radius: 9pt;
+  display: flex;
+  gap: 5px;
+  color: var(--white);
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.star img {
+  width: 15px;
+  height: 15px;
+}
+
+.star span {
+  font-size: 14px;
+  margin-top: 0.15rem;
+}
+
+.feed > .description {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feed > .description > span {
+  font-size: 18pt;
+}
+
+.feed > .description img {
+  width: 16px;
+  height: 16px;
+}
+
+.feed > .description > .category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.feed > .description > .category > .right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.feed > .description > .category > .right > span {
+  margin-top: 0.15rem;
+}
+
+.feed > .description > .category > span {
+  font-size: 12px;
+}
+
+.feed > .description > .working_hours {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.feed > .description > .working_hours > .right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.feed > .description > .working_hours > span {
+  font-size: 12px;
+}
