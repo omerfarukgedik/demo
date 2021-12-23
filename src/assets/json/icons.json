@@ -1,0 +1,14 @@
+{
+  "iconImageFiles": [
+    {
+      "iconName": "menu",
+      "iconPath": "/assets/icons/menu.svg"
+    }
+  ],
+  "customIcons": [
+    {
+      "iconName": "custom",
+      "iconData": "<svg xmlns=\"http://www.w3.org/2000/svg\" > <path d=\"...\" /> </svg>"
+    }
+  ]
+}
