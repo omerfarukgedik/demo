@@ -30,8 +30,8 @@ interface StoreInfo {
   userPoint: Number,
   workingHours: WorkingHours,
   status: String,
-  rate: DoubleRange,
-  minOrderPrice: DoubleRange
+  rate: Number,
+  minOrderPrice: Number
 }
 
 interface Feed {

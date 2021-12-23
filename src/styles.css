@@ -9,6 +9,8 @@
   --green: #34c47c;
   --red: #b70014;
   --box-shadow: #0108241a;
+  --error: #a3423c;
+  --error-dark: #461111;
 }
 
 h1,
@@ -41,4 +43,24 @@ body {
 
 .bold {
   font-weight: bold;
+}
+
+.error {
+  font-size: 12px;
+  background-color: var(--error);
+  color: var(--white);
+  padding: 20px 10px;
+  border-radius: 5px;
+}
+
+.error > .title {
+  font-size: 18px;
+  text-align: center;
+}
+
+.error > .description {
+  margin-top: 5px;
+  background-color: var(--error-dark);
+  padding: 10px 20px;
+  border-radius: 5px;
 }
