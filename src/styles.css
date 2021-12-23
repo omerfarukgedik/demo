@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap");
+@import "../node_modules/normalize.css/normalize.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css";
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
