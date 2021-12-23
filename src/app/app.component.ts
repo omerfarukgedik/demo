@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Feed } from 'src/app/models/Feed';
 import { MenuLink } from 'src/app/models/MenuLink';
 import { GetFeedService } from './services/get-feed.service';
@@ -9,22 +9,34 @@ import { GetFeedService } from './services/get-feed.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'demo-kerzz';
-  menuLinks: MenuLink[];
-  feeds: Feed[];
+  title: String = 'demo-kerzz';
+  isMenuOpen: Boolean = false;
+  menuLinks: MenuLink[] = [];
+  feeds: Feed[] = [];
   isLoading: Boolean = false;
-  isError: null;
-  page: {
-    limit: 0,
+  isError: any = null;
+  page: Object = {
+    limit: 10,
     skip: 0,
     latitude: 0,
     longitude: 0
   }
 
-  constructor(private getFeedService: GetFeedService) {
+  constructor(private getFeedService: GetFeedService) { }
+
+  @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+    //console.log($event.path[1]);
+    //console.log("scrolling");
+  }
+
+  clickMenu(isOpen: Boolean) {
+    this.isMenuOpen = isOpen;
+  }
+
+  getFeed(page) {
     this.isLoading = true;
-    this.getFeedService.getFeed(10).subscribe(data => {
-      this.feeds = data.response;
+    this.getFeedService.getFeed(page.limit, page.skip, page.latitude, page.longitude).subscribe(data => {
+      this.feeds = data;
       this.isLoading = false;
     }, err => {
       this.isLoading = false;
@@ -33,10 +45,15 @@ export class AppComponent implements OnInit {
     })
   }
 
-  goNextPage(limit: Number, skip: Number, latitude: Number, longitude: Number, service: GetFeedService) {
-
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(data => {
+      this.page = {
+        ...this.page,
+        latitude: data.coords.latitude,
+        longitude: data.coords.longitude
+      }
+    })
   }
-
 
   ngOnInit(): void {
     this.menuLinks = [
@@ -51,5 +68,8 @@ export class AppComponent implements OnInit {
         icon: 'restaurant'
       }
     ]
+
+    this.getLocation()
+    this.getFeed(this.page)
   }
 }
