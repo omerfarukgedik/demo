@@ -1,0 +1,27 @@
+.search {
+  display: grid;
+  grid-template-columns: 2fr 8fr 2fr;
+  background-color: var(--white);
+  align-items: center;
+  border-radius: 9px;
+  height: 50px;
+  box-shadow: 0px 5px 15px var(--box-shadow);
+}
+
+.search img {
+  width: 40px;
+  height: 40px;
+  justify-self: center;
+  color: var(--font-color);
+}
+
+.search > .search-img {
+  width: 16px;
+}
+
+.search > input {
+  height: 20px;
+  border: 0;
+  outline: none;
+  font-size: 0.8rem;
+}

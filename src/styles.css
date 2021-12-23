@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap");
 @import "../node_modules/normalize.css/normalize.css";
-@import "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css";
 
 :root {
   --white: #ffffff;
@@ -9,6 +8,7 @@
   --font-color: #1a1824;
   --green: #34c47c;
   --red: #b70014;
+  --box-shadow: #0108241a;
 }
 
 h1,
@@ -26,21 +26,7 @@ img {
 
 body {
   font-family: "Montserrat", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   background-color: var(--bg);
   color: var(--font-color);
-}
-
-.text-center {
-  text-align: center;
-}
-
-.w-100 {
-  width: 100%;
-}
-
-@media (max-width: 991px) {
-  body {
-    font-size: 0.9rem;
-  }
 }
