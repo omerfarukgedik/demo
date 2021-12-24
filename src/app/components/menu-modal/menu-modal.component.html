@@ -1,0 +1,8 @@
+<div class="modal-menu" *ngIf="isOpen">
+  <div class="menu">
+    <div class="item" *ngFor="let item of menu">
+      {{ item.name }}
+    </div>
+  </div>
+  <div class="close" (click)="clickMenu.emit(false)">X</div>
+</div>

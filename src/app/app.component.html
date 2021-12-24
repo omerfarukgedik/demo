@@ -1,5 +1,11 @@
+<app-menu-modal
+  (clickMenu)="clickMenu($event)"
+  [isOpen]="isMenuOpen"
+  [menu]="menuLinks"
+></app-menu-modal>
+
 <div class="wrapper">
-  <app-header [menu]="menuLinks" (clickMenu)="clickMenu($event)"></app-header>
+  <app-header (clickMenu)="clickMenu($event)"></app-header>
 
   <div class="layout">
     <app-search></app-search>

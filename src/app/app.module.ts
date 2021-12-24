@@ -8,6 +8,7 @@ import { SearchComponent } from './components/search/search.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { MenuModalComponent } from './components/menu-modal/menu-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     FeedComponent,
     FooterComponent,
     LoadingComponent,
+    MenuModalComponent,
   ],
   imports: [
     BrowserModule,
