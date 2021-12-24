@@ -23,11 +23,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   longitude: number = 0;
   limit: number = 10;
   skip: number = 0;
+  searchText: string = '';
 
   constructor(private getFeedService: GetFeedService) { }
 
   clickMenu(isOpen: boolean) {
     this.isMenuOpen = isOpen;
+  }
+
+  search(text: string = '') {
+    this.searchText = text;
   }
 
   getFeed(limit: number, skip: number, isNextPage: boolean = false) {

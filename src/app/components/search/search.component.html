@@ -1,5 +1,14 @@
 <div class="search">
-  <img class="search-img" src="../assets/icons/search.svg" />
-  <input placeholder="Mekan Ara" type="text" />
+  <img
+    (click)="search.emit(searchText); searchText = ''"
+    class="search-img"
+    src="../assets/icons/search.svg"
+  />
+  <input
+    (keyup.enter)="search.emit(searchText); searchText = ''"
+    [(ngModel)]="searchText"
+    placeholder="Mekan Ara"
+    type="text"
+  />
   <img src="../assets/icons/filter.svg" />
 </div>

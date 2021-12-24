@@ -8,7 +8,7 @@
   <app-header (clickMenu)="clickMenu($event)"></app-header>
 
   <div class="layout">
-    <app-search></app-search>
+    <app-search (search)="search($event)"></app-search>
     <app-loading *ngIf="isLoading"></app-loading>
 
     <div class="error" *ngIf="isError">
@@ -22,7 +22,7 @@
       <h4>Sonuçlar</h4>
 
       <div class="feeds">
-        <div *ngFor="let feed of feeds; index as i">
+        <div *ngFor="let feed of feeds | filter: searchText; index as i">
           <app-feed
             *ngIf="i + 1 == feeds.length"
             [feed]="feed"
