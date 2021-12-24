@@ -1,50 +1,50 @@
 interface Image {
-  itemType: String,
-  itemId: String,
-  imageSize: String,
-  base64: String,
-  storeId: String
+  itemType: string,
+  itemId: string,
+  imageSize: string,
+  base64: string,
+  storeId: string
 }
 
 interface Location {
-  type: String,
-  coordinates: Number[]
+  type: string,
+  coordinates: number[]
 }
 
-interface GeoLocation {
-  approve: Boolean,
-  latitude: String,
-  longitude: String
+interface GeoLocationObject {
+  approve?: boolean,
+  latitude: number,
+  longitude: number
 }
 
 interface WorkingHours {
-  day: Number,
-  open: String,
-  close: String,
-  closed: Boolean
+  day: number,
+  open: string,
+  close: string,
+  closed: boolean
 }
 
 interface StoreInfo {
-  id: String,
-  geoLocation: GeoLocation,
-  userPoint: Number,
+  id: string,
+  geoLocation: GeoLocationObject,
+  userPoint: number,
   workingHours: WorkingHours,
-  status: String,
-  rate: Number,
-  minOrderPrice: Number
+  status: string,
+  rate: number,
+  minOrderPrice: number
 }
 
 interface Feed {
-  id: String,
-  title: String,
-  text: String,
-  type: String,
+  id: string,
+  title: string,
+  text: string,
+  type: string,
   images: Image[],
   location: Location,
-  isDinner: Boolean,
-  isDelivery: Boolean,
+  isDinner: boolean,
+  isDelivery: boolean,
   storeInfo: StoreInfo,
-  categoryId: String
+  categoryId: string
 }
 
-export type { Feed }
+export type { Feed, GeoLocationObject }

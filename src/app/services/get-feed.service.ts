@@ -10,7 +10,7 @@ export class GetFeedService {
 
   constructor(private http: HttpClient) { }
 
-  getFeed(limit: Number = 5, skip: Number = 0, latitude: Number = 0, longitude: Number = 0): Observable<Feed[]> {
+  getFeed(limit: number = 5, skip: number = 0, latitude: number = 0, longitude: number = 0): Observable<Feed[]> {
     const headers = { 'apiKey': 'bW9jay04ODc3NTU2NjExMjEyNGZmZmZmZmJ2' };
     const body = { limit, skip, latitude, longitude };
 

@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
     SearchComponent,
     FeedComponent,
     FooterComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

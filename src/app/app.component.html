@@ -1,32 +1,33 @@
 <div class="wrapper">
-  <app-header [menu]="menuLinks"></app-header>
+  <app-header [menu]="menuLinks" (clickMenu)="clickMenu($event)"></app-header>
 
   <div class="layout">
     <app-search></app-search>
-    <ng-container *ngIf="isLoading">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Youtube_loading_symbol_1_(wobbly).gif"
-        alt=""
-      />
-    </ng-container>
-    <ng-container *ngIf="isError">
-      <div class="error">
-        <div class="title">
-          {{ isError.error.statusCode }} -> {{ isError.error.error }}
-        </div>
-        <div class="description">{{ isError.error.message }}</div>
+    <app-loading *ngIf="isLoading"></app-loading>
+
+    <div class="error" *ngIf="isError">
+      <div class="title">
+        {{ isError.error.statusCode }} -> {{ isError.error.error }}
       </div>
-    </ng-container>
+      <div class="description">{{ isError.error.message }}</div>
+    </div>
 
     <ng-container *ngIf="!isLoading && !isError">
       <h4>Sonuçlar</h4>
 
       <div class="feeds">
-        <div *ngFor="let feed of feeds">
-          <app-feed [feed]="feed"></app-feed>
+        <div *ngFor="let feed of feeds; index as i">
+          <app-feed
+            *ngIf="i + 1 == feeds.length"
+            [feed]="feed"
+            #theLastFeed
+          ></app-feed>
+          <app-feed *ngIf="i + 1 != feeds.length" [feed]="feed"></app-feed>
         </div>
       </div>
     </ng-container>
+
+    <app-loading *ngIf="isNextLoading"></app-loading>
   </div>
 
   <app-footer></app-footer>

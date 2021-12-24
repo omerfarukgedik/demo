@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Feed } from 'src/app/models/Feed';
 import { MenuLink } from 'src/app/models/MenuLink';
 import { GetFeedService } from './services/get-feed.service';
@@ -8,38 +8,39 @@ import { GetFeedService } from './services/get-feed.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title: String = 'demo-kerzz';
-  isMenuOpen: Boolean = false;
+export class AppComponent implements OnInit, AfterViewInit {
+  @ViewChildren('theLastFeed', { read: ElementRef })
+  theLastFeed: QueryList<ElementRef>;
+  title: string = 'demo-kerzz';
+  observer: any;
+  isMenuOpen: boolean = false;
   menuLinks: MenuLink[] = [];
   feeds: Feed[] = [];
-  isLoading: Boolean = false;
+  isLoading: boolean = false;
+  isNextLoading: boolean = false;
   isError: any = null;
-  page: Object = {
-    limit: 10,
-    skip: 0,
-    latitude: 0,
-    longitude: 0
-  }
+  latitude: number = 0;
+  longitude: number = 0;
+  limit: number = 10;
+  skip: number = 0;
 
   constructor(private getFeedService: GetFeedService) { }
 
-  @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
-    //console.log($event.path[1]);
-    //console.log("scrolling");
-  }
-
-  clickMenu(isOpen: Boolean) {
+  clickMenu(isOpen: boolean) {
     this.isMenuOpen = isOpen;
   }
 
-  getFeed(page) {
-    this.isLoading = true;
-    this.getFeedService.getFeed(page.limit, page.skip, page.latitude, page.longitude).subscribe(data => {
-      this.feeds = data;
+  getFeed(limit: number, skip: number, isNextPage: boolean = false) {
+    if (isNextPage) this.isNextLoading = true
+    else this.isLoading = true;
+
+    this.getFeedService.getFeed(limit, skip, this.latitude, this.longitude).subscribe(data => {
+      this.feeds = [...this.feeds, ...data.response];
       this.isLoading = false;
+      this.isNextLoading = false;
     }, err => {
       this.isLoading = false;
+      this.isNextLoading = false;
       this.isError = err;
       console.error(err)
     })
@@ -47,11 +48,8 @@ export class AppComponent implements OnInit {
 
   getLocation() {
     navigator.geolocation.getCurrentPosition(data => {
-      this.page = {
-        ...this.page,
-        latitude: data.coords.latitude,
-        longitude: data.coords.longitude
-      }
+      this.latitude = data.coords.latitude;
+      this.longitude = data.coords.longitude;
     })
   }
 
@@ -70,6 +68,27 @@ export class AppComponent implements OnInit {
     ]
 
     this.getLocation()
-    this.getFeed(this.page)
+    this.getFeed(this.limit, 0)
+    this.intersectionObserver()
+  }
+
+  ngAfterViewInit(): void {
+    this.theLastFeed.changes.subscribe((d) => {
+      if (d.last) this.observer.observe(d.last.nativeElement)
+    })
+  }
+
+  intersectionObserver() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    }
+
+    this.observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.getFeed(10, this.skip + 10, true)
+      }
+    }, options)
   }
 }

@@ -1,7 +1,7 @@
 interface MenuLink {
-  name: String,
-  url: String,
-  icon: String
+  name: string,
+  url: string,
+  icon: string
 }
 
 export type { MenuLink }
