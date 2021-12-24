@@ -38,6 +38,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   getFeed(limit: number, skip: number, isNextPage: boolean = false) {
     if (isNextPage) this.isNextLoading = true
     else this.isLoading = true;
+    console.log(this.latitude)
+    console.log(this.longitude)
 
     this.getFeedService.getFeed(limit, skip, this.latitude, this.longitude).subscribe(data => {
       this.feeds = [...this.feeds, ...data.response];
@@ -55,6 +57,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     navigator.geolocation.getCurrentPosition(data => {
       this.latitude = data.coords.latitude;
       this.longitude = data.coords.longitude;
+      this.getFeed(this.limit, 0)
     })
   }
 
@@ -73,7 +76,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     ]
 
     this.getLocation()
-    this.getFeed(this.limit, 0)
     this.intersectionObserver()
   }
 

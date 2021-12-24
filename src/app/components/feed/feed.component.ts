@@ -8,17 +8,19 @@ import { Feed, GeoLocationObject } from 'src/app/models/Feed';
 })
 export class FeedComponent implements OnInit {
   @Input('feed') feed: Feed;
-
+  latitude: number;
+  longitude: number;
   constructor() { }
 
   ngOnInit(): void {
+    this.getLocation()
   }
 
-  getLocationKm(source: GeoLocationObject, target: GeoLocationObject) {
+  getLocationKm(target: GeoLocationObject) {
     let R = 6371;
-    let latitudeDistance = this.radian(target.latitude - source.latitude);
-    let longitudeDistance = this.radian(target.longitude - source.longitude);
-    let sourceLatitude = this.radian(source.latitude);
+    let latitudeDistance = this.radian(target.latitude - this.latitude);
+    let longitudeDistance = this.radian(target.longitude - this.longitude);
+    let sourceLatitude = this.radian(this.latitude);
     let targetLatitude = this.radian(target.latitude);
 
     let a =
@@ -30,6 +32,13 @@ export class FeedComponent implements OnInit {
 
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return (R * c).toFixed(2);
+  }
+
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(data => {
+      this.latitude = data.coords.latitude;
+      this.longitude = data.coords.longitude;
+    })
   }
 
   radian(value: number) {
